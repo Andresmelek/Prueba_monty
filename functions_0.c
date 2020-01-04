@@ -1,0 +1,98 @@
+#include "monty.h"
+
+/**
+ * push - entry point
+ * @stack: stack_t variable
+ * @line_number: unsigned int variable
+*/
+
+void push(stack_t **stack, unsigned int line_number)
+{
+	stack_t *new;
+
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+		exit(EXIT_FAILURE);
+	new->n = line_number;
+	new->prev = NULL;
+	new->next = *stack;
+	if (*stack != NULL)
+		(*stack)->prev = new;
+	*stack = new;
+}
+
+/**
+ * pall - entry point
+ * @stack: stack_t variable
+ * @line_number: unsigned int variable
+*/
+
+void pall(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+	(void)line_number;
+
+	tmp = *stack;
+	if (tmp == NULL)
+		return;
+	while (tmp)
+	{
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
+	}
+}
+
+/**
+ * pint - entry point
+ * @stack: stack_t variable
+ * @line_number: unsigned int variable
+*/
+
+void pint(stack_t **stack, unsigned int line_number)
+{
+	(void)line_number;
+
+	if (stack == NULL)
+	{
+		fprintf(stderr, "L<line_number>: can't pint, stack empty\n");
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
+}
+
+/**
+ * nop - entry point
+ * @stack: stack_t variable
+ * @line_number: unsigned int variable
+*/
+
+void nop(stack_t **stack, unsigned int line_number)
+{
+	stack = stack;
+	line_number = line_number;
+}
+
+/**
+ * swap - entry point
+ * @stack: stack_t variable
+ * @line_number: unsigned int variable
+*/
+
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+	(void)line_number;
+
+	tmp = *stack;
+	if (tmp == NULL || (tmp->next == NULL && tmp->prev == NULL))
+	{
+		fprintf(stderr, "L<line_number>: can't swap, stack too short\n");
+		exit(EXIT_FAILURE);
+	}
+
+	tmp->prev = tmp->next;
+	tmp->next->prev = NULL;
+	tmp->next = tmp->next->next;
+	tmp->prev->next = tmp;
+	(*stack) = tmp->prev;
+}
