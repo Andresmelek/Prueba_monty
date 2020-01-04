@@ -39,21 +39,23 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void push(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void sub(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void division(stack_t **stack, unsigned int line_number);
-void mul(stack_t **stack, unsigned int line_number);
-void mod(stack_t **stack, unsigned int line_number);
-void pchar(stack_t **stack, unsigned int line_number);
+void push(stack_t **, unsigned int);
+void pop(stack_t **, unsigned int);
+void swap(stack_t **, unsigned int);
+void pint(stack_t **, unsigned int);
+void add(stack_t **, unsigned int);
+void nop(stack_t **, unsigned int);
+void pall(stack_t **, unsigned int);
+void sub(stack_t **, unsigned int);
+void add(stack_t **, unsigned int);
+void division(stack_t **, unsigned int);
+void mul(stack_t **, unsigned int);
+void mod(stack_t **, unsigned int);
+void pchar(stack_t **, unsigned int);
+
 void is_opcode(char *, stack_t **);
 char **parse(char *);
+void freestack(stack_t **);
 
 #endif
 

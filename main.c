@@ -40,6 +40,8 @@ int main(int ac, char **av)
 		}
 	}
 
+	freestack(&st);
+
 	return (0);
 }
 
