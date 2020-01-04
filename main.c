@@ -78,7 +78,6 @@ char **parse(char *buffer)
 void is_opcode(char *buff, stack_t **st)
 {
 	char **cmds;
-	cmds = parse(buff);
 
 	instruction_t opts[] = {
 		{"push", push},
@@ -97,6 +96,7 @@ void is_opcode(char *buff, stack_t **st)
 	};
 	int i = 0, j = 0, len, b;
 
+	cmds = parse(buff);
 	while (cmds[i] != NULL)
 	{
 		j = 0;
