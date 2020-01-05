@@ -102,17 +102,15 @@ void is_opcode(char *buff, stack_t **st, unsigned int ln)
 		{
 			len = strlen(cmds[i]);
 			if (strncmp(opts[j].opcode, cmds[i], len) == 0)
-			{
-				b = 1;
+			{ b = 1;
 				if (j == 0)
 					check_push(st, cmds, ln);
 				else
 					opts[j].f(st, ln);
-				break;
-			}
+				break; }
 			j++;
 		}
-		if (b == 0)
+		if (b == 0 || len < 3)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", ln, cmds[i]);
 			free(cmds);
