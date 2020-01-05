@@ -63,6 +63,11 @@ char **parse(char *buffer)
 
 	delim = "\t \r\a";
 	cmds = malloc(sizeof(char *) * 3);
+	if (cmds == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed");
+		exit(EXIT_FAILURE);
+	}
 
 	cmd = strtok(buffer, delim);
 	while (cmd != NULL && i < 2)
@@ -85,7 +90,6 @@ char **parse(char *buffer)
 void is_opcode(char *buff, stack_t **st, unsigned int ln)
 {
 	char **cmds;
-
 	instruction_t opts[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"nop", nop}, {"add", add}, {"sub", sub},
@@ -101,6 +105,12 @@ void is_opcode(char *buff, stack_t **st, unsigned int ln)
 		while (opts[j].opcode != NULL)
 		{
 			len = strlen(cmds[i]);
+			if ((i == 0 && strlen(cmds[0]) <= 2))
+			{
+				fprintf(stderr, "L%d: unknown instruction %s\n", ln, cmds[i]);
+				free(cmds);
+				exit(EXIT_FAILURE);
+			}
 			if (strncmp(opts[j].opcode, cmds[i], len) == 0)
 			{ b = 1;
 				if (j == 0)
@@ -110,7 +120,7 @@ void is_opcode(char *buff, stack_t **st, unsigned int ln)
 				break; }
 			j++;
 		}
-		if (b == 0 || len < 3)
+		if (b == 0)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", ln, cmds[i]);
 			free(cmds);
