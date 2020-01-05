@@ -143,7 +143,7 @@ void check_push(stack_t **st, char **cmds, unsigned int ln)
 			i++, b = 1;
 		if (_isdigit(cmds1[i]) == 0)
 		{
-			fprintf(stderr, "L<%d>: usage: push integer\n", ln);
+			fprintf(stderr, "L%d: usage: push integer\n", ln);
 			free(cmds), freestack(st);
 			exit(EXIT_FAILURE);
 		}
