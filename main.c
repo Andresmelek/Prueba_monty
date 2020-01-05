@@ -20,7 +20,7 @@ int main(int ac, char **av)
 	file_read = open(av[1], O_RDONLY, 0600);
 	if (file_read == -1)
 	{
-		fprintf(stderr, "Error: Can't open file%s\n", av[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 
