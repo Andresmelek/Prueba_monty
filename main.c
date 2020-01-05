@@ -63,7 +63,7 @@ char **parse(char *buffer)
 	cmds = malloc(sizeof(char *) * 3);
 
 	cmd = strtok(buffer, delim);
-	while (cmd != NULL)
+	while (cmd != NULL && i < 2)
 	{
 		cmds[i] = cmd;
 		cmd = strtok(NULL, delim);
