@@ -8,7 +8,6 @@
 
 void pop(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
 
 	if ((*stack) == NULL)
 	{
@@ -34,7 +33,6 @@ void pop(stack_t **stack, unsigned int line_number)
 void add(stack_t **stack, unsigned int line_number)
 {
 	unsigned int sum;
-	(void)line_number;
 
 	if ((*stack)->next == NULL && (*stack)->prev == NULL)
 	{
@@ -57,7 +55,6 @@ void add(stack_t **stack, unsigned int line_number)
 void sub(stack_t **stack, unsigned int line_number)
 {
 	unsigned int res;
-	(void)line_number;
 
 	if ((*stack)->next == NULL && (*stack)->prev == NULL)
 	{
@@ -80,11 +77,15 @@ void sub(stack_t **stack, unsigned int line_number)
 void division(stack_t **stack, unsigned int line_number)
 {
 	unsigned int divide;
-	(void)line_number;
 
 	if ((*stack)->next == NULL && (*stack)->prev == NULL)
 	{
 		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	divide = (*stack)->next->n / (*stack)->n;
@@ -103,7 +104,6 @@ void division(stack_t **stack, unsigned int line_number)
 void mul(stack_t **stack, unsigned int line_number)
 {
 	unsigned int power;
-	(void)line_number;
 
 	if ((*stack)->next == NULL && (*stack)->prev == NULL)
 	{

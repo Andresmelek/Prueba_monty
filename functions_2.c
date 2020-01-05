@@ -32,7 +32,6 @@ void mod(stack_t **stack, unsigned int line_number)
 void pchar(stack_t **stack, unsigned int line_number)
 {
 	int letter;
-	(void)line_number;
 
 	if (stack == NULL)
 	{
@@ -63,11 +62,10 @@ void pstr(stack_t **stack, unsigned int line_number)
 {
 	int string;
 	stack_t *tmp;
-	(void)line_number;
 
 	if (stack == NULL)
 	{
-		fprintf(stderr, "L<%d>: can't pchar, stack empty\n", line_number);
+		fprintf(stderr, "L<%d>: can't pstr, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
