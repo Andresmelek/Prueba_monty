@@ -65,7 +65,7 @@ char **parse(char *buffer)
 	cmds = malloc(sizeof(char *) * 3);
 	if (cmds == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -108,7 +108,7 @@ void is_opcode(char *buff, stack_t **st, unsigned int ln)
 			if ((i == 0 && strlen(cmds[0]) <= 2))
 			{
 				fprintf(stderr, "L%d: unknown instruction %s\n", ln, cmds[i]);
-				free(cmds);
+				free(cmds), freestack(st);
 				exit(EXIT_FAILURE);
 			}
 			if (strncmp(opts[j].opcode, cmds[i], len) == 0)
@@ -123,7 +123,7 @@ void is_opcode(char *buff, stack_t **st, unsigned int ln)
 		if (b == 0)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", ln, cmds[i]);
-			free(cmds);
+			free(cmds), freestack(st);
 			exit(EXIT_FAILURE);
 		}
 		i++;
