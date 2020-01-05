@@ -85,21 +85,12 @@ void is_opcode(char *buff, stack_t **st, unsigned int ln)
 	char **cmds;
 
 	instruction_t opts[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"nop", nop},
-		{"add", add},
-		{"sub", sub},
-		{"div", division},
-		{"mul", mul},
-		{"mod", mod},
-		{"pchar", pchar},
+		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
+		{"swap", swap}, {"nop", nop}, {"add", add}, {"sub", sub},
+		{"div", division}, {"mul", mul}, {"mod", mod}, {"pchar", pchar},
 		{NULL, NULL}
 	};
-	int i = 0, j = 0, len, b;
+	int i = 0, j = 0, len, b = 0;
 
 	cmds = parse(buff);
 	while (cmds[i] != NULL)
@@ -119,9 +110,15 @@ void is_opcode(char *buff, stack_t **st, unsigned int ln)
 			}
 			j++;
 		}
+		if (b == 0)
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n", ln, cmds[i]);
+			free(cmds);
+			exit(EXIT_FAILURE);
+		}
 		i++;
 	}
-	b = b, free(cmds);
+	free(cmds);
 }
 
 /**
