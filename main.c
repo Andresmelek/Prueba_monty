@@ -29,6 +29,9 @@ int main(int ac, char **av)
 		i = 0;
 		while (buffer[i] != '\0')
 		{
+			if (buffer[i] == '#')
+				while (buffer[i] != '\n')
+					i++;
 			if (buffer[i] != '\n')
 				buff[j] = buffer[i];
 			else
