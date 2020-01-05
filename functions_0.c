@@ -10,8 +10,6 @@ void push(stack_t **stack, unsigned int number)
 {
 	stack_t *new;
 
-	printf("number: %d\n", number);
-
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
