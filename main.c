@@ -108,12 +108,6 @@ void is_opcode(char *buff, stack_t **st, unsigned int ln)
 		while (opts[j].opcode != NULL)
 		{
 			len = strlen(opts[j].opcode);
-			if ((i == 0 && strlen(cmds[0]) <= 2))
-			{
-				fprintf(stderr, "L%d: unknown instruction %s\n", ln, cmds[i]);
-				free(cmds), freestack(st);
-				exit(EXIT_FAILURE);
-			}
 			if (strncmp(opts[j].opcode, cmds[i], len) == 0)
 			{ b = 1;
 				if (j == 0)
@@ -157,7 +151,7 @@ void check_push(stack_t **st, char **cmds, unsigned int ln)
 	{
 		if (cmds1[0] == '-' && b == 0)
 			i++, b = 1;
-		if (_isdigit(cmds1[i]) == 0 || _isdigit((cmds1[i + 1]) == 0))
+		if (_isdigit(cmds1[i]) == 0)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", ln);
 			free(cmds), freestack(st);
