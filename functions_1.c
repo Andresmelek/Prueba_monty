@@ -12,7 +12,7 @@ void pop(stack_t **stack, unsigned int line_number)
 
 	if ((*stack) == NULL)
 	{
-		fprintf(stderr, "L<%d>: can't pop an empty stack\n", line_number);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -38,7 +38,7 @@ void add(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL && (*stack)->prev == NULL)
 	{
-		fprintf(stderr, "L<%d>: can't add, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	sum = (*stack)->n + (*stack)->next->n;
@@ -61,7 +61,7 @@ void sub(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL && (*stack)->prev == NULL)
 	{
-		fprintf(stderr, "L<%d>: can't sub, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	res = (*stack)->next->n - (*stack)->n;
@@ -84,7 +84,7 @@ void division(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL && (*stack)->prev == NULL)
 	{
-		fprintf(stderr, "L<%d>: can't div, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	divide = (*stack)->next->n / (*stack)->n;
@@ -107,7 +107,7 @@ void mul(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL && (*stack)->prev == NULL)
 	{
-		fprintf(stderr, "L<%d>: can't mul, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	power = (*stack)->next->n * (*stack)->n;

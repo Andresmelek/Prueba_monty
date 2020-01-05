@@ -13,7 +13,7 @@ void mod(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL && (*stack)->prev == NULL)
 	{
-		fprintf(stderr, "L<%d>: can't mod, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	module = (*stack)->next->n % (*stack)->n;
@@ -36,7 +36,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 
 	if (stack == NULL)
 	{
-		fprintf(stderr, "L<%d>: can't pchar, stack empty,\n", line_number);
+		fprintf(stderr, "L%d: can't pchar, stack empty,\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	letter = (*stack)->n;
@@ -48,7 +48,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		fprintf(stderr, "L<%d>: can't pchar, value out of range,\n", line_number);
+		fprintf(stderr, "L%d: can't pchar, value out of range,\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 }
