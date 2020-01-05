@@ -136,6 +136,7 @@ void check_push(stack_t **st, char **cmds, unsigned int ln)
 	if (cmds[1] == NULL)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", ln);
+		free(cmds), freestack(st);
 		exit(EXIT_FAILURE);
 	}
 	cmds1 = cmds[1];
