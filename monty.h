@@ -52,10 +52,12 @@ void division(stack_t **, unsigned int);
 void mul(stack_t **, unsigned int);
 void mod(stack_t **, unsigned int);
 void pchar(stack_t **, unsigned int);
+
 int _isdigit(int);
-void is_opcode(char *, stack_t **);
+void is_opcode(char *, stack_t **, unsigned int);
 char **parse(char *);
 void freestack(stack_t **);
+void check_push(stack_t **, char **, unsigned int);
 
 #endif
 

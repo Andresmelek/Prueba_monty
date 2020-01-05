@@ -3,33 +3,28 @@
 /**
  * push - entry point
  * @stack: stack_t variable
- * @line_number: unsigned int variable
+ * @number: int variable
 */
 
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int number)
 {
 	stack_t *new;
 
-	if (_isdigit(line_number) == 1)
+	printf("number: %d\n", number);
+
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
 	{
-		new = malloc(sizeof(stack_t));
-		if (new == NULL)
-		{
-			fprintf(stderr, "Error: malloc failed");
-			exit(EXIT_FAILURE);
-		new->n = line_number;
-		new->prev = NULL;
-		new->next = *stack;
-		if (*stack != NULL)
-			(*stack)->prev = new;
-		*stack = new;
-		}
-	}
-	else
-	{
-		fprintf(stderr, "L<line_number>: usage: push integer");
+		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);
 	}
+
+	new->n = number;
+	new->prev = NULL;
+	new->next = *stack;
+	if (*stack != NULL)
+		(*stack)->prev = new;
+	*stack = new;
 }
 
 /**
@@ -65,7 +60,7 @@ void pint(stack_t **stack, unsigned int line_number)
 
 	if (stack == NULL)
 	{
-		fprintf(stderr, "L<line_number>: can't pint, stack empty\n");
+		fprintf(stderr, "L<%d>: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*stack)->n);
@@ -97,7 +92,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	tmp = *stack;
 	if (tmp == NULL || (tmp->next == NULL && tmp->prev == NULL))
 	{
-		fprintf(stderr, "L<line_number>: can't swap, stack too short\n");
+		fprintf(stderr, "L<%d>: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 

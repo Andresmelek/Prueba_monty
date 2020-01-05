@@ -11,6 +11,7 @@
 int main(int ac, char **av)
 {
 	stack_t *st = NULL;
+	unsigned int ln = 1;
 	int file_read, i = 0, j = 0, cant_read;
 	char buffer[1024], buff[1024];
 
@@ -33,8 +34,9 @@ int main(int ac, char **av)
 			else
 			{
 				buff[j] = '\0';
-				is_opcode(buff, &st);
+				is_opcode(buff, &st, ln);
 				j = -1;
+				ln++;
 			}
 			i++, j++;
 		}
@@ -75,9 +77,10 @@ char **parse(char *buffer)
  * is_opcode - entry point
  * @buff: char variable
  * @st: stack_t variable
+ * @ln: unsigned int variable
 */
 
-void is_opcode(char *buff, stack_t **st)
+void is_opcode(char *buff, stack_t **st, unsigned int ln)
 {
 	char **cmds;
 
@@ -109,9 +112,9 @@ void is_opcode(char *buff, stack_t **st)
 			{
 				b = 1;
 				if (j == 0)
-					opts[j].f(st, atoi(cmds[1]));
+					check_push(st, cmds, ln);
 				else
-					opts[j].f(st, 0);
+					opts[j].f(st, ln);
 				break;
 			}
 			j++;
@@ -121,3 +124,30 @@ void is_opcode(char *buff, stack_t **st)
 	b = b, free(cmds);
 }
 
+/**
+ * check_push - entry point
+ * @st: stack_t variable
+ * @cmds: char variable
+ * @ln: unsigned int
+*/
+
+void check_push(stack_t **st, char **cmds, unsigned int ln)
+{
+	int i = 0, b = 0;
+	char *cmds1;
+
+	cmds1 = cmds[1];
+	while (cmds1[i] != '\0')
+	{
+		if (cmds1[0] == '-' && b == 0)
+			i++, b = 1;
+		if (_isdigit(cmds1[i]) == 0)
+		{
+			fprintf(stderr, "L<%d>: usage: push integer\n", ln);
+			free(cmds), freestack(st);
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
+	push(st, atoi(cmds1));
+}
