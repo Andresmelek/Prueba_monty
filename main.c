@@ -97,7 +97,7 @@ void is_opcode(char *buff, stack_t **st, unsigned int ln)
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"nop", nop}, {"add", add}, {"sub", sub},
 		{"div", division}, {"mul", mul}, {"mod", mod}, {"pchar", pchar},
-		{NULL, NULL}
+		{"pstr", pstr},	{NULL, NULL}
 	};
 	int i = 0, j = 0, len, b = 0;
 
