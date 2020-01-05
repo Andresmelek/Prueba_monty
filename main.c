@@ -43,6 +43,8 @@ int main(int ac, char **av)
 	}
 
 	freestack(&st);
+	if (close(file_read) == -1)
+		exit(EXIT_FAILURE);
 
 	return (0);
 }
