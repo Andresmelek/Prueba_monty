@@ -133,6 +133,11 @@ void check_push(stack_t **st, char **cmds, unsigned int ln)
 	int i = 0, b = 0;
 	char *cmds1;
 
+	if (cmds[1] == NULL)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", ln);
+		exit(EXIT_FAILURE);
+	}
 	cmds1 = cmds[1];
 	while (cmds1[i] != '\0')
 	{
