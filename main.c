@@ -119,5 +119,6 @@ void is_opcode(char *buff, stack_t **st)
 		i++;
 	}
 	b = b;
+	free(cmds);
 }
 
