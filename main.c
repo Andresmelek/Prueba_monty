@@ -154,7 +154,7 @@ void check_push(stack_t **st, char **cmds, unsigned int ln)
 	{
 		if (cmds1[0] == '-' && b == 0)
 			i++, b = 1;
-		if (_isdigit(cmds1[i]) == 0)
+		if (_isdigit(cmds1[i]) == 0 || _isdigit((cmds1[i + 1]) == 0))
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", ln);
 			free(cmds), freestack(st);
