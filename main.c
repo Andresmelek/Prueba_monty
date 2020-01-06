@@ -13,7 +13,7 @@ int main(int ac, char **av)
 	stack_t *st = NULL;
 	unsigned int ln = 1;
 	int file_read, i = 0, j = 0, cant_read;
-	char buffer[1024], buff[1024];
+	char buffer[5000], buff[1024];
 
 	if (ac != 2)
 		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
