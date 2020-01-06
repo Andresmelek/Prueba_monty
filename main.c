@@ -11,44 +11,28 @@
 int main(int ac, char **av)
 {
 	stack_t *st = NULL;
-	unsigned int ln = 1;
-	int file_read, i = 0, j = 0, cant_read;
-	char buffer[5000], buff[1024];
+	char *buffer = NULL;
+	size_t buff_size = 0;
+	int line_count = 0;
+	ssize_t line_size;
+	FILE *fp = fopen(av[1], "r");
 
 	if (ac != 2)
-		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
-	file_read = open(av[1], O_RDONLY, 0600);
-	if (file_read == -1)
+		dprintf(STDERR_FILENO, "Usage: ./monty <file>.m\n"), exit(EXIT_FAILURE);
+	if (!fp)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "Error opening file '%s'\n", av[1]);
+		return (EXIT_FAILURE);
 	}
-
-	while ((cant_read = read(file_read, buffer, 1024)) > 0)
+	while ((line_size = getline(&buffer, &buff_size, fp)) != -1)
 	{
-		i = 0;
-		while (buffer[i] != '\0')
-		{
-			if (buffer[i] == '#')
-				while (buffer[i] != '\n')
-					i++;
-			if (buffer[i] != '\n')
-				buff[j] = buffer[i];
-			else
-			{
-				buff[j] = '\0';
-				is_opcode(buff, &st, ln);
-				j = -1;
-				ln++;
-			}
-			i++, j++;
-		}
+		line_count++;
+		if (buffer[0] != '#')
+			is_opcode(buffer, &st, line_count);
 	}
-
-	freestack(&st);
-	if (close(file_read) == -1)
-		exit(EXIT_FAILURE);
-
+	free(buffer);
+	buffer = NULL;
+	fclose(fp);
 	return (0);
 }
 
@@ -64,7 +48,7 @@ char **parse(char *buffer)
 	char **cmds, *cmd, *delim;
 	int i = 0;
 
-	delim = "\t \r\a";
+	delim = "\t \n";
 	cmds = malloc(sizeof(char *) * 3);
 	if (cmds == NULL)
 	{
