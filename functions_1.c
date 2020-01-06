@@ -17,8 +17,11 @@ void pop(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	if (tmp->next == NULL && tmp->prev == NULL)
+	if (tmp->next == NULL)
+	{
 		(*stack) = NULL;
+		free(tmp);
+	}
 	else
 	{
 		tmp = tmp->next;
