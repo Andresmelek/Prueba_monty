@@ -35,7 +35,7 @@ int main(int ac, char **av)
 	}
 
 	free(buffer);
-	buffer = NULL;
+	freestack(&st);
 	fclose(fp);
 	return (0);
 }
@@ -57,6 +57,7 @@ char **parse(char *buffer)
 	if (cmds == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		free(buffer);
 		exit(EXIT_FAILURE);
 	}
 
