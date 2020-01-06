@@ -47,8 +47,8 @@ void add(stack_t **stack, unsigned int line_number)
 	}
 	sum = (*stack)->n + (*stack)->next->n;
 
-	pop(stack, 0);
-	pop(stack, 0);
+	pop(stack, line_number);
+	pop(stack, line_number);
 	push(stack, sum);
 }
 
@@ -69,8 +69,8 @@ void sub(stack_t **stack, unsigned int line_number)
 	}
 	res = (*stack)->next->n - (*stack)->n;
 
-	pop(stack, 0);
-	pop(stack, 0);
+	pop(stack, line_number);
+	pop(stack, line_number);
 	push(stack, res);
 }
 
@@ -96,8 +96,8 @@ void division(stack_t **stack, unsigned int line_number)
 	}
 	divide = (*stack)->next->n / (*stack)->n;
 
-	pop(stack, 0);
-	pop(stack, 0);
+	pop(stack, line_number);
+	pop(stack, line_number);
 	push(stack, divide);
 }
 
@@ -111,15 +111,15 @@ void mul(stack_t **stack, unsigned int line_number)
 {
 	unsigned int power;
 
-	if ((*stack) || ((*stack)->next == NULL && (*stack)->prev == NULL))
+	if ((*stack == NULL) || ((*stack)->next == NULL && (*stack)->prev == NULL))
 	{
 		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	power = (*stack)->next->n * (*stack)->n;
 
-	pop(stack, 0);
-	pop(stack, 0);
+	pop(stack, line_number);
+	pop(stack, line_number);
 	push(stack, power);
 }
 
